@@ -11,16 +11,16 @@ const UserTable = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/userdata");
+        const response = await axios.get("http://localhost:3001/get");
+        console.log("Response data:", response.data);
         dispatch(getUser(response.data));
       } catch (error) {
         console.error("Error fetching users:", error);
       }
     };
-
+  
     fetchUserData();
   }, []);
-
   const handleDelete = async (id) => {
     try {
        await axios.delete("http://localhost:3001/delete/" + id)

@@ -8,22 +8,30 @@ const AddDataCard = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
+
+  const [error, setError] = useState(null);
+
   const handleAddData = async (e) => {
     e.preventDefault();
     try {
-      const userData = { name, email }; // Assuming 'name' and 'email' are defined elsewhere
-      const response = await axios.post(
-        "http://localhost:3001/createUser",
-        userData
-      );
+      const userData = { name, email };
+      const response = await axios.post("http://localhost:3001/create", userData);
       dispatch(addUser(response.data));
-      alert("Data is added...!")
+      alert("Data is added...!");
     } catch (error) {
       console.error("Error creating user:", error);
+      if (error.response) {
+        console.error("Server responded with:", error.response.status, error.response.data);
+      }
+      setError("Error creating user. Please try again.");
     }
   };
+
+
   return (
     <div className="max-w-md mx-auto bg-white rounded-md shadow-md p-6">
+      {error && <div className="text-red-500">{error}</div>}
+
       <h2 className="text-lg font-semibold mb-4">Add Data</h2>
       <div className="mb-4">
         <label
