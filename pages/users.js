@@ -11,7 +11,7 @@ const UserTable = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/get");
+        const response = await axios.get("https://crud-backend-beta-gray.vercel.app/get");
         console.log("Response data:", response.data);
         dispatch(getUser(response.data));
       } catch (error) {
@@ -23,7 +23,7 @@ const UserTable = () => {
   }, []);
   const handleDelete = async (id) => {
     try {
-       await axios.delete("http://localhost:3001/delete/" + id)
+       await axios.delete("https://crud-backend-beta-gray.vercel.app/delete/" + id)
         dispatch(deleteUser({id}))
         .catch(error => {
           console.error("Error deleting user:", error);

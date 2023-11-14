@@ -15,7 +15,7 @@ const AddDataCard = () => {
     e.preventDefault();
     try {
       const userData = { name, email };
-      const response = await axios.post("http://localhost:3001/create", userData);
+      const response = await axios.post("https://crud-backend-beta-gray.vercel.app/create", userData);
       dispatch(addUser(response.data));
       alert("Data is added...!");
     } catch (error) {
